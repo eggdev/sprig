@@ -1,0 +1,23 @@
+{
+  "name": "scn-lite",
+  "version": "0.0.0",
+  "private": true,
+  "bin": {
+    "scn": "src/cli.ts"
+  },
+  "type": "module",
+  "scripts": {
+    "check": "bun run typecheck && bun run lint && bun run format-check && bun test",
+    "format": "oxfmt",
+    "format-check": "oxfmt --check",
+    "lint": "oxlint src test",
+    "test": "bun test",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.4.2",
+    "oxfmt": "^0.60.0",
+    "oxlint": "^1.75.0",
+    "typescript": "~6.0.3"
+  }
+}
