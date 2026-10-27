@@ -87,3 +87,12 @@ test('errors come back as JSON with a code', async () => {
     body: { error: { message: '"edits" must be an array.' } },
   });
 });
+
+test('names from Object.prototype are not methods', async () => {
+  for (const name of ['constructor', 'toString', 'hasOwnProperty', '__proto__']) {
+    expect(await post(`/v1/repos/demo/${name}`, {})).toMatchObject({
+      status: 404,
+      body: { error: { code: 'not_found' } },
+    });
+  }
+});
