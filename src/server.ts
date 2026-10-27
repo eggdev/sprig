@@ -120,7 +120,8 @@ export async function handle(registry: Registry, request: Request): Promise<Resp
       return json(200, { repos: await registry.list() });
     }
     const match = /^\/v1\/repos\/([^/]+)\/([^/]+)$/u.exec(pathname);
-    const method = match && methods[match[2] ?? ''];
+    const name = match?.[2] ?? '';
+    const method = Object.hasOwn(methods, name) ? methods[name] : undefined;
     if (request.method !== 'POST' || !match || !method) {
       throw new ScnError('not_found', `No route for ${request.method} ${pathname}.`);
     }
